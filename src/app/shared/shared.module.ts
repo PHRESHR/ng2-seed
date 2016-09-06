@@ -11,6 +11,9 @@ import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
 import { AngularFireModule } from 'angularfire2';
 
+import { AuthEffects } from './effects/auth.effect';
+import { rootReducer } from './reducers';
+
 import {
   firebaseConfig,
   firebaseAuthConfig
@@ -28,21 +31,32 @@ import { NavbarComponent } from './navbar';
     CommonModule,
     RouterModule,
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
-    // StoreModule.provideStore(rootReducer),
-    // StoreDevtoolsModule.instrumentStore({
-    //   maxAge: 5,
-    //   monitor: useLogMonitor({
-    //     visible: true,
-    //     position: 'right'
-    //   })
-    // }),
-    // StoreLogMonitorModule
+    StoreModule.provideStore(rootReducer),
+    StoreDevtoolsModule.instrumentStore({
+      maxAge: 5,
+      monitor: useLogMonitor({
+        visible: true,
+        position: 'right'
+      })
+    }),
+    StoreLogMonitorModule,
+    /**
+     * runEffects configures all providers for @ngrx/effects. Observables decorated
+     * as an @Effect() within the supplied services will ultimately be merged,
+     * with output of relevant (registered as effects) actions being
+     * dispatched into your application store. Any side-effects in
+     * your application should be registered as effects.
+     *
+     * Source: https://github.com/ngrx/effects/blob/master/lib/run-effects.ts#L8-L20
+     */
+    EffectsModule.run(AuthEffects)
   ],
   declarations: [
     NavbarComponent
   ],
   exports: [
     NavbarComponent,
+    StoreLogMonitorModule,
     CommonModule,
     FormsModule,
     RouterModule
