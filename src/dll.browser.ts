@@ -52,7 +52,16 @@ export function vendors(env?: any) {
     '@angular/forms',
     '@angular/common',
     '@angular/core',
-    '@angular/http'
+    '@angular/http',
+
+    // ngrx
+    '@ngrx/core/add/operator/enterZone',
+    '@ngrx/core/add/operator/select',
+    '@ngrx/effects',
+    '@ngrx/store',
+
+    // Immutable
+    'immutable'
   ];
 }
 
@@ -63,8 +72,25 @@ export function rxjs(env?: any) {
     'rxjs/Subscription',
     'rxjs/Subject',
     'rxjs/BehaviorSubject',
-    'rxjs/add/operator/map',
-    'rxjs/add/operator/mergeMap',
+    'rxjs/add/observable/combineLatest',
+    'rxjs/add/observable/fromEvent',
+    'rxjs/add/observable/fromEventPattern',
+    'rxjs/add/observable/merge',
+    'rxjs/add/observable/never',
+    'rxjs/add/observable/of',
+    'rxjs/add/operator/catch',
+    'rxjs/add/operator/combineLatest',
+    'rxjs/add/operator/debounceTime',
     'rxjs/add/operator/distinctUntilChanged',
+    'rxjs/add/operator/do',
+    'rxjs/add/operator/filter',
+    'rxjs/add/operator/ignoreElements',
+    'rxjs/add/operator/let',
+    'rxjs/add/operator/map',
+    'rxjs/add/operator/pluck',
+    'rxjs/add/operator/publishReplay',
+    'rxjs/add/operator/switchMap',
+    'rxjs/add/operator/takeUntil',
+    'rxjs/add/operator/withLatestFrom',
   ];
 }
