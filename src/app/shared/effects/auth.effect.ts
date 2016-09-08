@@ -34,7 +34,7 @@ export class AuthEffects {
  */
 
   @Effect()
-  logout = this.actions$
+  logout$ = this.actions$
     .ofType(authActions.Types.LOG_OUT)
     .map(() => this.auth$.logout())
 
@@ -44,7 +44,8 @@ export class AuthEffects {
     .switchMap(() =>
       this.auth$.login({provider: AuthProviders.Google})
         .then(userInfo => new authActions.AuthSuccess(userInfo))
-        .catch(error => new authActions.AuthFailure(error))
+        .catch((error) => Observable.of(new authActions.AuthFailure(error)))
+        .catch(() => console.log('Oops someting went wrong!'))
     );
 
   @Effect() loginWithFacebook$ = this.actions$
@@ -67,11 +68,11 @@ export class AuthEffects {
 
   @Effect() authSuccess$ = this.actions$
     .ofType(authActions.Types.AUTH_SUCCESS)
-    .map<Auth>(action => action.payload)
-    .map(() => console.log(Actions));
+    // .map<Auth>(action => action.payload)
+    .map((action) => console.log(action.payload));
 
   @Effect() authFailure$ = this.actions$
     .ofType(authActions.Types.AUTH_FAILURE)
-    .map<Auth>(action => action.payload)
-    .map(() => console.log(Actions));
+    // .map<Auth>(action => action.payload)
+    .map((action) => console.log(action.payload));
 }

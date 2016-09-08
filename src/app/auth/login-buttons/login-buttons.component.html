@@ -1,0 +1,9 @@
+<div *ngIf="isAuthenticated">
+  <button (click)="logout.emit()">Logout</button>
+</div>
+<div *ngIf="!isAuthenticated">
+  <button
+    (click)="loginWithGoogle.emit()">
+    Google
+  </button>
+</div>

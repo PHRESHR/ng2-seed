@@ -30,19 +30,19 @@ export const Types = {
 export class GoogleAuthentication implements Action {
   type = Types.GOOGLE_AUTHENTICATION;
 
-  constructor(public payload: Auth) { }
+  constructor() { }
 }
 
 export class FacebookAuthentication implements Action {
   type = Types.FACEBOOK_AUTHENTICATION;
 
-  constructor(public payload: Auth) { }
+  constructor() { }
 }
 
 export class TwitterAuthentication implements Action {
   type = Types.TWITTER_AUTHENTICATION;
 
-  constructor(public payload: Auth) { }
+  constructor() { }
 }
 
 export class AuthSuccess implements Action {

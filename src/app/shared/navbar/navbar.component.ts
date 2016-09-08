@@ -11,6 +11,7 @@ import {
 })
 export class NavbarComponent implements OnInit {
   title = 'PHRESHR';
+  @Input() isAuthenticated: boolean;
 
   constructor() { }
 

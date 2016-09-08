@@ -43,7 +43,11 @@ export default function(state = initialState, action: authActions.All): AuthStat
         userInfo: auth
       });
     }
-    case authActions.Types.AUTH_FAILURE:
+    case authActions.Types.AUTH_FAILURE: {
+      return Object.assign({}, state, {
+        error: Error
+      });
+    }
     case authActions.Types.LOG_OUT: {
       return Object.assign({}, state, {
         isAuthenticated : false,

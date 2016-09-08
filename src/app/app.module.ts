@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowseModule } from './browse/browse.module';
 import { AboutModule } from './about/about.module';
 import { NotFoundModule } from './not-found/not-found.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { NotFoundModule } from './not-found/not-found.module';
   imports: [
     BrowserModule,
     AppRoutes,
+    AuthModule,
     BrowseModule,
     AboutModule,
     NotFoundModule,
