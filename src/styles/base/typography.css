@@ -6,19 +6,6 @@ body {
   font-weight: 300;
 }
 
-a {
-  color: var(--brandYellow);
-}
-
-/*a:--any-link {
-  color: var(--brandRed);
-  transition: var(--transition);
-}
-
-a:--any-link {
-  text-decoration: underline;
-}*/
-
 :--heading {
   font-family: var(--heading);
   font-weight: 700;

@@ -4,5 +4,5 @@
 @import './base/mixins.css';
 @import './base/normalize.css';
 @import './base/typography.css';
-@import './base/html.css';
+@import './base/elements.css';
 @import './base/media.css';
