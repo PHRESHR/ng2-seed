@@ -1,5 +1,6 @@
-<phrsr-auth-status></phrsr-auth-status>
-<phrsr-navbar
-  [isAuthenticated]="authenticated$ | async"></phrsr-navbar>
+<phrsr-navbar></phrsr-navbar>
+<button (click)="increment()">Increment</button>
+<div>Current Count: {{ counter | async }}</div>
+<button (click)="decrement()">Decrement</button>
 <router-outlet></router-outlet>
 <ngrx-store-log-monitor toggleCommand="ctrl-u"></ngrx-store-log-monitor>

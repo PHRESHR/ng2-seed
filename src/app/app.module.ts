@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { ApolloModule } from 'angular2-apollo';
 
 import { AppComponent } from './app.component';
 import { AppRoutes } from './app.routing';
@@ -8,7 +9,7 @@ import { SharedModule } from './shared/shared.module';
 import { BrowseModule } from './browse/browse.module';
 import { AboutModule } from './about/about.module';
 import { NotFoundModule } from './not-found/not-found.module';
-import { AuthModule } from './auth/auth.module';
+import { client } from './client';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,8 @@ import { AuthModule } from './auth/auth.module';
   ],
   imports: [
     BrowserModule,
+    ApolloModule.withClient(client),
     AppRoutes,
-    AuthModule,
     BrowseModule,
     AboutModule,
     NotFoundModule,
@@ -27,5 +28,5 @@ import { AuthModule } from './auth/auth.module';
 })
 export class AppModule {
 
-  constructor() {}
+  constructor() { }
 }

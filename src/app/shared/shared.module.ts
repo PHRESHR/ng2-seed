@@ -9,15 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreLogMonitorModule, useLogMonitor } from '@ngrx/store-log-monitor';
 
-import { AngularFireModule } from 'angularfire2';
-
-import { AuthEffects } from './effects/auth.effect';
-import { rootReducer } from './reducers';
-
-import {
-  firebaseConfig,
-  firebaseAuthConfig
-} from './firebase.config';
+import { counterReducer } from './counter';
 
 import { NavbarComponent } from './navbar';
 
@@ -30,8 +22,7 @@ import { NavbarComponent } from './navbar';
   imports: [
     CommonModule,
     RouterModule,
-    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
-    StoreModule.provideStore(rootReducer),
+    StoreModule.provideStore({ counter: counterReducer }, { counter: 0 }),
     StoreDevtoolsModule.instrumentStore({
       maxAge: 5,
       monitor: useLogMonitor({
@@ -49,7 +40,7 @@ import { NavbarComponent } from './navbar';
      *
      * Source: https://github.com/ngrx/effects/blob/master/lib/run-effects.ts#L8-L20
      */
-    EffectsModule.run(AuthEffects)
+    EffectsModule
   ],
   declarations: [
     NavbarComponent
