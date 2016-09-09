@@ -148,7 +148,8 @@ module.exports = env => {
       ]),
       new atl.ForkCheckerPlugin(),
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.ProgressPlugin({})
+      new webpack.ProgressPlugin({}),
+      new webpack.NamedModulesPlugin()
     ],
     postcss: [
       require('postcss-partial-import'),
