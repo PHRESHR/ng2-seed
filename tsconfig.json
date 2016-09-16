@@ -7,15 +7,14 @@
     "noEmitHelpers": true,
     "pretty": true,
     "sourceMap": true,
-    "lib": ["es5", "dom"],
+    "lib": ["es2015", "dom"],
     "strictNullChecks": false,
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {},
     "typeRoots": [
       "./node_modules/@types"
     ],
     "types": [
-      "core-js",
       "node",
       "isomorphic-fetch",
       "firebase"
