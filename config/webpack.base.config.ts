@@ -9,8 +9,10 @@ import * as WebpackMd5Hash from 'webpack-md5-hash';
 import * as AssetsPlugin from 'assets-webpack-plugin';
 import * as atl from 'awesome-typescript-loader';
 // import * as webpack from 'webpack';
+// import * as WebpackDashboardPlugin from 'webpack-dashboard/plugin';
 
 const webpack = require('webpack');
+const WebpackDashboardPlugin = require('webpack-dashboard/plugin');
 
 module.exports = env => {
   const addPlugin = (add, plugin) => add ? plugin : undefined;
@@ -33,6 +35,7 @@ module.exports = env => {
     })),
 
     ifProd(new webpack.DefinePlugin({
+      PROD: env.prod,
       'process.env': {
         NODE_ENV: '"production"'
       }
@@ -62,16 +65,16 @@ module.exports = env => {
     entry: {
       main: [].concat(polyfills, helpers.root('src/main.browser.ts'), rxjs)
     },
+    output: {
+      filename: '[name].bundle.js',
+      path: helpers.root('dist'),
+      chunkFilename: '[id].chunk.js'
+    },
     resolve: {
       root: helpers.root('src'),
       modulesDirectories: ['node_modules'],
       extensions: ['', '.ts', '.js'],
       // unsafeCache: true
-    },
-    output: {
-      filename: '[name].bundle.js',
-      path: helpers.root('dist'),
-      chunkFilename: '[id].chunk.js',
     },
     module: {
       preLoaders: [
@@ -136,6 +139,15 @@ module.exports = env => {
         context: helpers.ROOT,
         manifest: helpers.getManifest('polyfills'),
       }),
+      // new webpack.optimize.CommonsChunkPlugin({
+      //   minChunks: Infinity,
+      //   name: 'inline',
+      //   filename: 'inline.js',
+      //   sourceMapFilename: 'inline.map'
+      // }),
+      // new HtmlWebpackPlugin({
+      //   template: 'src/index.html'
+      // }),
       new CopyWebpackPlugin([
         {
           from: 'src/index.html',
@@ -146,6 +158,9 @@ module.exports = env => {
           to: 'assets'
         }
       ]),
+      new webpack.DefinePlugin({
+        PROD: env.prod ? 'true' : 'false'
+      }),
       new atl.ForkCheckerPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.ProgressPlugin({}),
@@ -170,6 +185,17 @@ module.exports = env => {
       inline: env.hot,
       historyApiFallback: true,
       stats: 'minimal'
+    },
+    htmlLoader: {
+      minimize: true,
+      removeAttributeQuotes: false,
+      caseSensitive: true,
+      customAttrSurround: [
+        [/#/, /(?:)/],
+        [/\*/, /(?:)/],
+        [/\[?\(?/, /(?:)/]
+      ],
+      customAttrAssign: [/\)?\]?=/]
     },
     node: {
       global: 'window',
